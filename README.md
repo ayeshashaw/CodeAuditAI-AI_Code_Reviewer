@@ -1,29 +1,32 @@
-# 🤖 Code Reviewer
+# 🤖 Code Reviewer & Executor
 
 <div align="center">
 
-![Code Reviewer Banner](https://via.placeholder.com/800x200/3b82f6/ffffff?text=AI+Code+Reviewer)
+![Code Reviewer Banner](https://via.placeholder.com/800x200/3b82f6/ffffff?text=AI+Code+Reviewer+%26+Executor)
 
-**Transform Your Code with AI-Powered Reviews**
+**Transform Your Code with AI-Powered Reviews & Real-Time Execution**
 
 [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
 [![Express.js](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)](https://expressjs.com/)
 [![Google AI](https://img.shields.io/badge/Google%20AI-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
+[![Piston API](https://img.shields.io/badge/Piston%20API-FF6B35?style=for-the-badge&logo=code&logoColor=white)](https://piston.readthedocs.io/)
 
 </div>
 
 ## 📋 Project Description
 
-This project is a web-based code reviewer application that leverages AI to provide feedback on code. It consists of a React frontend and a Node.js backend, offering intelligent code analysis and review capabilities powered by Google's Gemini AI.
+This project is a comprehensive web-based code reviewer and executor application that leverages AI to provide feedback on code while also allowing real-time code execution. It consists of a React frontend and a Node.js backend, offering intelligent code analysis, review capabilities powered by Google's Gemini AI, and code execution through the Piston API.
 
 ## ✨ Features
 
 - 🔍 **AI-powered code analysis and review**
+- ⚡ **Real-time code execution with output display**
 - 🌐 **Support for multiple programming languages**
-- 💻 **User-friendly interface for submitting and reviewing code**
-- ⚡ **Real-time code feedback**
+- 💻 **User-friendly interface for submitting, reviewing, and executing code**
 - 🎨 **Modern, responsive design**
+- 🚀 **Instant feedback on code quality and functionality**
+- 📊 **Execution results with error handling**
 
 ## 🛠️ Technologies Used
 
@@ -36,11 +39,6 @@ This project is a web-based code reviewer application that leverages AI to provi
 <br><em>UI Library</em>
 </td>
 <td align="center">
-<img src="https://raw.githubusercontent.com/chakra-ui/chakra-ui/main/media/logo-colored@2x.png" width="50" height="50" alt="Chakra UI"/>
-<br><strong>Chakra UI</strong>
-<br><em>Component Library</em>
-</td>
-<td align="center">
 <img src="https://vitejs.dev/logo.svg" width="50" height="50" alt="Vite"/>
 <br><strong>Vite</strong>
 <br><em>Build Tool</em>
@@ -50,13 +48,13 @@ This project is a web-based code reviewer application that leverages AI to provi
 <br><strong>Lucide React</strong>
 <br><em>Icons</em>
 </td>
-</tr>
-<tr>
 <td align="center">
 <img src="https://raw.githubusercontent.com/i18next/react-i18next/master/assets/react-i18next.min.svg" width="50" height="50" alt="React i18next"/>
 <br><strong>React i18next</strong>
 <br><em>Internationalization</em>
 </td>
+</tr>
+<tr>
 <td align="center">
 <img src="https://microsoft.github.io/monaco-editor/favicon.ico" width="50" height="50" alt="Monaco Editor"/>
 <br><strong>Monaco Editor</strong>
@@ -66,6 +64,11 @@ This project is a web-based code reviewer application that leverages AI to provi
 <img src="https://raw.githubusercontent.com/axios/axios/HEAD/logo.svg" width="50" height="50" alt="Axios"/>
 <br><strong>Axios</strong>
 <br><em>HTTP Client</em>
+</td>
+<td align="center">
+<img src="https://via.placeholder.com/50x50/FF6B35/ffffff?text=P" alt="Piston API"/>
+<br><strong>Piston API</strong>
+<br><em>Code Execution</em>
 </td>
 <td></td>
 </tr>
@@ -151,7 +154,7 @@ http://localhost:5173/
 ## 📁 Project Structure
 
 ```
-📦 Code Reviewer
+📦 Code Reviewer & Executor
 ├── 📄 README.md
 ├── 📂 backend/
 │   ├── 🚫 .gitignore
@@ -180,6 +183,8 @@ http://localhost:5173/
     │   ├── 📁 assets/              # Static assets
     │   ├── 🧩 components/          # Reusable UI components
     │   ├── 🔄 context/             # React context for global state
+    │   ├── 📄 constants.js         # Language versions and configurations
+    │   ├── ⚡ executeCode.js       # Piston API integration for code execution
     │   └── 🚀 main.jsx             # Entry point
     └── ⚙️ vite.config.js
 ```
@@ -205,25 +210,81 @@ http://localhost:5173/
 }
 ```
 
-### 🔄 Workflow
+### Code Execution Integration
+
+The application includes a powerful code execution feature using the Piston API:
+
+```javascript
+import axios from 'axios';
+import { LANGUAGE_VERSIONS } from './constants';
+
+const API = axios.create({
+  baseURL: 'https://emkc.org/api/v2/piston',
+});
+
+const PISTON_LANGUAGE_MAP = {
+  javascript: 'javascript',
+  typescript: 'typescript',
+  nodejs: 'javascript',
+  python: 'python',
+  java: 'java',
+  cpp: 'cpp',
+  c: 'c',
+  html: 'html',
+  css: 'css',
+};
+
+export const executeCode = async (language, sourceCode) => {
+  if (language === 'html' || language === 'css') {
+    return {
+      run: {
+        output: `${language.toUpperCase()} code cannot be executed. This is markup/styling code that needs to be rendered in a browser.`,
+        stderr: null,
+        code: 0
+      }
+    };
+  }
+  
+  const pistonLanguage = PISTON_LANGUAGE_MAP[language] || language;
+  
+  const response = await API.post('/execute', {
+    language: pistonLanguage,
+    version: LANGUAGE_VERSIONS[language],
+    files: [
+      {
+        name: `main.${getFileExtension(language)}`,
+        content: sourceCode,
+      },
+    ],
+  });
+  
+  return response.data;
+};
+```
+
+### 🔄 Enhanced Workflow
 
 ```mermaid
 graph TD
-    A[👤 User Input] --> B[📝 Frontend Request]
-    B --> C[🔧 Backend Processing]
-    C --> D[🤖 AI Service Interaction]
-    D --> E[🧠 Gemini AI Review]
-    E --> F[📤 Backend Response]
-    F --> G[💻 Frontend Display]
+    A[👤 User Input] --> B[📝 Code Entry]
+    B --> C{🤔 User Choice}
+    C -->|Review| D[🤖 AI Review Path]
+    C -->|Execute| E[⚡ Code Execution Path]
+    D --> F[🧠 Gemini AI Analysis]
+    E --> G[🔧 Piston API Execution]
+    F --> H[📤 Review Results]
+    G --> I[📊 Execution Output]
+    H --> J[💻 Display Results]
+    I --> J
 ```
 
-1. **👤 User Input:** User enters code in Monaco Editor and selects language
-2. **📝 Frontend Request:** POST request sent to `/ai/check` endpoint
-3. **🔧 Backend Processing:** Request routed to `AI.controllers.js`
-4. **🤖 AI Service Interaction:** Controller calls `AI.services.js`
-5. **🧠 Gemini AI Review:** AI analyzes code using system instructions
-6. **📤 Backend Response:** AI review sent back to frontend
-7. **💻 Frontend Display:** Review displayed to user
+**Supported Languages for Execution:**
+- ✅ JavaScript/Node.js
+- ✅ TypeScript
+- ✅ Python
+- ✅ Java
+- ✅ C/C++
+- ⚠️ HTML/CSS (Display only - markup languages)
 
 ## 🌟 Real-Life Use Cases
 
@@ -231,43 +292,67 @@ graph TD
 <tr>
 <td align="center">
 <h3>👨‍💻 Individual Developers</h3>
-Get instant feedback on code quality and best practices before committing changes
+Get instant feedback on code quality, test code functionality, and learn from AI suggestions
 </td>
 <td align="center">
 <h3>🎓 Learning & Education</h3>
-Students learn from AI-generated suggestions and understand common coding mistakes
+Students can write, execute, and review code in one place while learning from mistakes
 </td>
 </tr>
 <tr>
 <td align="center">
-<h3>👥 Small Teams</h3>
-Supplement human code reviews by catching obvious issues automatically
+<h3>👥 Code Interviews</h3>
+Practice coding problems with immediate execution and AI-powered feedback
 </td>
 <td align="center">
-<h3>🔄 CI/CD Integration</h3>
-Automated pre-commit checks for baseline code quality assurance
+<h3>🔧 Rapid Prototyping</h3>
+Quickly test code snippets and algorithms with instant execution results
 </td>
 </tr>
 <tr>
-<td align="center" colspan="2">
-<h3>♻️ Refactoring Assistance</h3>
-Get suggestions for improving existing code readability and maintainability
+<td align="center">
+<h3>🚀 Algorithm Testing</h3>
+Validate algorithm correctness and performance with execution output
+</td>
+<td align="center">
+<h3>📚 Code Documentation</h3>
+Generate examples with working code that can be executed and reviewed
 </td>
 </tr>
 </table>
+
+## 🎯 Key Features
+
+### 🤖 AI-Powered Code Review
+- Intelligent analysis using Google Gemini AI
+- Best practices suggestions
+- Code quality assessment
+- Security vulnerability detection
+
+### ⚡ Real-Time Code Execution
+- Support for 8+ programming languages
+- Instant output display
+- Error handling and debugging assistance
+- Performance metrics
+
+### 🎨 User Experience
+- Monaco Editor integration for professional coding experience
+- Syntax highlighting for all supported languages
+- Responsive design for desktop and mobile
+- Multi-language support with i18n
 
 ## 📸 Screenshots
 
 <div align="center">
 
 ### 🏠 Landing Page
-![Landing Page](https://via.placeholder.com/600x400/3b82f6/ffffff?text=Landing+Page+Preview)
+![Landing Page](https://via.placeholder.com/600x400/3b82f6/ffffff?text=Code+Reviewer+%26+Executor)
 
-### 💻 Code Editor
-![Code Editor](https://via.placeholder.com/600x400/10b981/ffffff?text=Code+Editor+Interface)
+### 💻 Code Editor with Execution
+![Code Editor](https://via.placeholder.com/600x400/10b981/ffffff?text=Code+Editor+%26+Execution+Interface)
 
 ### 🤖 AI Review Results
-![AI Review](https://via.placeholder.com/600x400/8b5cf6/ffffff?text=AI+Review+Results)
+![AI Review](https://via.placeholder.com/600x400/8b5cf6/ffffff?text=AI+Review+%26+Execution+Results)
 
 </div>
 
@@ -288,6 +373,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙏 Acknowledgments
 
 - Google Gemini AI for providing powerful code analysis capabilities
+- Piston API for enabling seamless code execution in multiple languages
 - Monaco Editor team for the excellent web-based code editor
 - React and Node.js communities for their amazing tools and documentation
 
