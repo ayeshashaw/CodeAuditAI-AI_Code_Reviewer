@@ -5,7 +5,9 @@ const cors = require("cors")
 
 const PORT = process.env.PORT;
 const app = express();
-app.use(cors())
+app.use(cors({
+  origin: "http://localhost:5173",
+}));
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -15,5 +17,5 @@ app.get("/", (req, res) => {
 app.use("/ai", router);
 
 app.listen(PORT, () => {
-  console.log("Server started .... 3000");
+  console.log(`Server started ....${PORT}`);
 });
