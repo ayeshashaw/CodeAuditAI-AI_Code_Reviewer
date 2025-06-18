@@ -207,55 +207,17 @@ http://localhost:5173/
 
 ### Code Execution Integration
 
-The application includes a powerful code execution feature using the Piston API:
+This application includes a powerful code execution feature utilizing the **Piston API**.
 
-```javascript
-import axios from 'axios';
-import { LANGUAGE_VERSIONS } from './constants';
+- ⚙️ **Piston API**: A free, open-source code execution engine supporting multiple programming languages such as JavaScript, Python, C++, and more.
+- 📡 **HTTP API**: Executes code on the server through a simple HTTP API at the `/execute` endpoint.
+- 📦 **Axios Integration**: Use Axios to send source code, programming language, and file details in a POST request.
+- 📂 **Response Output**: The API returns output, errors, and status, making it ideal for compilers or code playgrounds.
+- 🚫 **HTML/CSS Handling**: Skips execution for HTML and CSS files, displaying an appropriate message instead.
 
-const API = axios.create({
-  baseURL: 'https://emkc.org/api/v2/piston',
-});
+#### Why Use It
 
-const PISTON_LANGUAGE_MAP = {
-  javascript: 'javascript',
-  typescript: 'typescript',
-  nodejs: 'javascript',
-  python: 'python',
-  java: 'java',
-  cpp: 'cpp',
-  c: 'c',
-  html: 'html',
-  css: 'css',
-};
-
-export const executeCode = async (language, sourceCode) => {
-  if (language === 'html' || language === 'css') {
-    return {
-      run: {
-        output: `${language.toUpperCase()} code cannot be executed. This is markup/styling code that needs to be rendered in a browser.`,
-        stderr: null,
-        code: 0
-      }
-    };
-  }
-  
-  const pistonLanguage = PISTON_LANGUAGE_MAP[language] || language;
-  
-  const response = await API.post('/execute', {
-    language: pistonLanguage,
-    version: LANGUAGE_VERSIONS[language],
-    files: [
-      {
-        name: `main.${getFileExtension(language)}`,
-        content: sourceCode,
-      },
-    ],
-  });
-  
-  return response.data;
-};
-```
+This integration is perfect for building online IDEs, coding applications, AI code reviewers, or learning platforms.
 
 ### 🔄 Enhanced Workflow
 
@@ -361,9 +323,6 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
@@ -376,9 +335,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 <div align="center">
 
-**Made with ❤️ by [Your Name]**
+**Made with ❤️ by Ayesha Shaw**
 
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/yourusername)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/yourprofile)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ayeshashaw)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ayesha-shaw)
 
 </div>
