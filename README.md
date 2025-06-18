@@ -60,7 +60,7 @@ This project is a comprehensive web-based code reviewer and executor application
 <br><em>HTTP Client</em>
 </td>
 <td align="center">
-<img src="https://www.shutterstock.com/image-vector/api-application-interface-icon-simple-600nw-2188533787.jpg" alt="Piston API"/>
+<img src="" alt="Piston API"/>
 <br><strong>Piston API</strong>
 <br><em>Code Execution</em>
 </td>
