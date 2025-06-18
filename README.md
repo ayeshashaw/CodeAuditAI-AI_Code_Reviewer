@@ -2,7 +2,6 @@
 
 <div align="center">
 
-![Code Reviewer Banner](https://via.placeholder.com/800x200/3b82f6/ffffff?text=AI+Code+Reviewer+%26+Executor)
 
 **Transform Your Code with AI-Powered Reviews & Real-Time Execution**
 
