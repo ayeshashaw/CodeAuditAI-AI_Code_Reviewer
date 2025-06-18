@@ -6,7 +6,7 @@ const cors = require("cors")
 const PORT = process.env.PORT;
 const app = express();
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: "https://code-audit-ai-ai-code-reviewer.vercel.app",
 }));
 app.use(express.json());
 
