@@ -9,7 +9,7 @@
 [![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
 [![Express.js](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)](https://expressjs.com/)
 [![Google AI](https://img.shields.io/badge/Google%20AI-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
-[![Piston API](https://cdn-icons-png.flaticon.com/512/1493/1493169.png)](https://piston.readthedocs.io/)
+[![Piston API]()](https://piston.readthedocs.io/)
 
 </div>
 
