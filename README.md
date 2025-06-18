@@ -302,13 +302,12 @@ Generate examples with working code that can be executed and reviewed
 <div align="center">
 
 ### 🏠 Landing Page
-![Landing Page](https://via.placeholder.com/600x400/3b82f6/ffffff?text=Code+Reviewer+%26+Executor)
-
+![Landing Page](frontend/public/images/LandingPage.png)
 ### 💻 Code Editor with Execution
-![Code Editor](https://via.placeholder.com/600x400/10b981/ffffff?text=Code+Editor+%26+Execution+Interface)
+![Code Editor](frontend/public/images/CodeEditor.png)
 
 ### 🤖 AI Review Results
-![AI Review](https://via.placeholder.com/600x400/8b5cf6/ffffff?text=AI+Review+%26+Execution+Results)
+![AI Review](frontend/public/images/AIReview.png)
 
 </div>
 
