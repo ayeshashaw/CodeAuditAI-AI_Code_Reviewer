@@ -48,11 +48,6 @@ This project is a comprehensive web-based code reviewer and executor application
 <br><strong>Lucide React</strong>
 <br><em>Icons</em>
 </td>
-<td align="center">
-<img src="https://raw.githubusercontent.com/i18next/react-i18next/master/assets/react-i18next.min.svg" width="50" height="50" alt="React i18next"/>
-<br><strong>React i18next</strong>
-<br><em>Internationalization</em>
-</td>
 </tr>
 <tr>
 <td align="center">
