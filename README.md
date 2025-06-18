@@ -1,4 +1,4 @@
-# 🤖 Code Reviewer & Executor
+# 🤖 CodeAuditAI (Code Reviewer & Executor)
 
 <div align="center">
 
