@@ -8,6 +8,7 @@ const SYSTEM_INSTRUCTION = fs.readFileSync(
   "utf-8"
 );
 
+
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_AI_API_KEY);
 
 const model = genAI.getGenerativeModel({
